@@ -73,7 +73,7 @@ CACHE_MAX_ENTRIES_PER_CLUSTER = int(os.getenv("CACHE_MAX_ENTRIES_PER_CLUSTER", "
 CACHE_MAX_CLUSTERS_TO_SEARCH = int(os.getenv("CACHE_MAX_CLUSTERS_TO_SEARCH", "1"))
 
 
-app = FastAPI(title="Trademarkia Semantic Search")
+app = FastAPI(title="Semantic Search Service")
 
 
 # Load resources at startup
@@ -196,14 +196,14 @@ def clear_cache() -> Dict[str, Any]:
 
 @app.get("/")
 def read_root() -> Dict[str, str]:
-    return {"message": "Welcome to the Trademarkia semantic search service"}
+    return {"message": "Welcome to the semantic search service"}
 
 
 if __name__ == "__main__":
     import argparse
     import uvicorn
 
-    parser = argparse.ArgumentParser(description="Run the Trademarkia semantic search API")
+    parser = argparse.ArgumentParser(description="Run the semantic search API")
     parser.add_argument("--host", default="0.0.0.0", help="Host to bind the server to")
     parser.add_argument("--port", type=int, default=8000, help="Port to listen on")
     parser.add_argument(
