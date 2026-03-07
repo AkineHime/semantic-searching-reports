@@ -63,9 +63,15 @@ PY
 
 ---
 
-## 🔥 Precompute embeddings + clustering
+### 3) Download the dataset + precompute embeddings
 
-Run the preprocessing pipeline to build the vector store (ChromaDB) and clustering artifacts:
+The dataset itself is **not** included in this repo (it is large). Run the helper script to download and write it into the expected layout:
+
+```powershell
+python download_20newsgroups.py
+```
+
+Then run the preprocessing pipeline to build the vector store (ChromaDB) and clustering artifacts:
 
 ```powershell
 python src/precompute.py --n-clusters 20 --collection-name newsgroups_minilm
