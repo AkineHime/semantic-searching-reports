@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env
+
+# VS Code
+.vscode/
+
+# ChromaDB persistent store
+chroma_db/
+
+# NLTK downloads
+nltk_data/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Generated artifacts
+*.log
+*.sqlite
+*.db
+
+# Notebook checkpoints
+.ipynb_checkpoints/
