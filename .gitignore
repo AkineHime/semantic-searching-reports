@@ -11,6 +11,9 @@ venv/
 # VS Code
 .vscode/
 
+# Genkit metadata
+.genkit/
+
 # ChromaDB persistent store
 chroma_db/
 
