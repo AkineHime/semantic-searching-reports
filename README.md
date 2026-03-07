@@ -1,4 +1,4 @@
-# Trademarkia Semantic Search
+# Semantic Search Service
 
 A **semantic search** service built on the 20 Newsgroups dataset.
 
@@ -15,8 +15,8 @@ It provides:
 ### 1) Clone the repo
 
 ```powershell
-git clone <your-repo-url> trademarkia
-cd trademarkia
+git clone <your-repo-url> semantic-search
+cd semantic-search
 ```
 
 ### 2) Create + activate a virtual environment
@@ -38,40 +38,21 @@ pip install -r requirements.txt
 
 This project expects the 20 Newsgroups data to live in `data/20_newsgroups/`.
 
-You can download it with scikit-learn (the script below will write each post as a file):
+### ✅ Recommended (one step)
+
+Run the included helper script. It downloads the official UCI archive and extracts it into the expected layout:
 
 ```powershell
-python - <<'PY'
-from sklearn.datasets import fetch_20newsgroups
-import os
-
-data = fetch_20newsgroups(subset='all', remove=('headers','footers','quotes'))
-
-out_dir = os.path.join('data', '20_newsgroups')
-for target, text in zip(data.target, data.data):
-    label = data.target_names[target].replace('.', '_')
-    folder = os.path.join(out_dir, label)
-    os.makedirs(folder, exist_ok=True)
-    file_path = os.path.join(folder, f"{hash(text)}.txt")
-    with open(file_path, 'w', encoding='utf-8', errors='ignore') as f:
-        f.write(text)
-print('Done writing dataset files to', out_dir)
-PY
+python download_20newsgroups.py
 ```
 
 > ⚠️ This dataset is intentionally **not** checked into git (it is large).
 
 ---
 
-### 3) Download the dataset + precompute embeddings
+## 🔥 Precompute embeddings + clustering
 
-The dataset itself is **not** included in this repo (it is large). Run the helper script to download and write it into the expected layout:
-
-```powershell
-python download_20newsgroups.py
-```
-
-Then run the preprocessing pipeline to build the vector store (ChromaDB) and clustering artifacts:
+Once the dataset is downloaded and extracted into `data/20_newsgroups/`, run the preprocessing pipeline to build the vector store and clustering artifacts:
 
 ```powershell
 python src/precompute.py --n-clusters 20 --collection-name newsgroups_minilm
