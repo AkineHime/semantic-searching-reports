@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env
+
+# VS Code
+.vscode/
+
+# ChromaDB persistent store
+chroma_db/
+
+# NLTK downloads
+nltk_data/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# Precomputed artifacts (embeddings, cluster models, etc.)
+artifacts/
+
+# Large data and docs not needed in repo
+AI&ML Engineer Task - Trademarkia.pdf
+data/
+
+# Git large file lock
+*.lock
