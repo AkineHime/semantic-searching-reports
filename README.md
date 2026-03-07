@@ -42,6 +42,8 @@ This project expects the 20 Newsgroups data to live in `data/20_newsgroups/`.
 
 Run the included helper script. It downloads the official UCI archive and extracts it into the expected layout:
 
+https://archive.ics.uci.edu/dataset/113/twenty+newsgroups
+
 ```powershell
 python download_20newsgroups.py
 ```
