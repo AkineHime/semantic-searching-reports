@@ -48,6 +48,10 @@ https://archive.ics.uci.edu/dataset/113/twenty+newsgroups
 python download_20newsgroups.py
 ```
 
+```powershell
+python download_20newsgroups.py
+```
+
 > ⚠️ This dataset is intentionally **not** checked into git (it is large).
 
 ---
