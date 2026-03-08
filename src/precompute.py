@@ -7,6 +7,7 @@ import pandas as pd
 import torch
 from sentence_transformers import SentenceTransformer
 from sklearn.mixture import GaussianMixture
+from typing import Literal
 
 import chromadb
 import nltk
@@ -64,7 +65,7 @@ def fit_fuzzy_clusters(
     embeddings: np.ndarray,
     n_components: int,
     random_state: int = 42,
-    covariance_type: str = "full",
+    covariance_type: Literal["full", "tied", "diag", "spherical"] = "full",
 ) -> GaussianMixture:
     """Fit a GaussianMixture (soft clustering) on the embeddings."""
     print(f"Fitting GaussianMixture with n_components={n_components}...")
@@ -111,7 +112,12 @@ def main():
     model = choose_model(args.model_name)
     print("Generating document embeddings...")
     documents_to_embed = df["normalized_text"].tolist()
-    embeddings = model.encode(documents_to_embed, show_progress_bar=True, device=model.device)
+    # `sentence-transformers` accepts device as str (e.g., "cpu"/"cuda")
+    embeddings = model.encode(
+        documents_to_embed,
+        show_progress_bar=True,
+        device=str(model.device),
+    )
 
     # 4. Fit fuzzy clusters
     gmm = fit_fuzzy_clusters(embeddings, n_components=args.n_clusters)
@@ -156,7 +162,7 @@ def main():
             ids=ids[i : i + batch_size],
             documents=docs_for_db[i : i + batch_size],
             embeddings=embeddings[i : i + batch_size],
-            metadatas=metadatas[i : i + batch_size],
+            metadatas=metadatas[i : i + batch_size],  # type: ignore[arg-type]
         )
 
     print("\nPre-computation and storage complete.")

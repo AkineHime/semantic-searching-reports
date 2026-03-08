@@ -48,7 +48,12 @@ def main(out_dir: Path = Path("data") / "20_newsgroups"):
 
             dest_path = out_dir / Path(*member_path.parts[1:])
             dest_path.parent.mkdir(parents=True, exist_ok=True)
-            with tar.extractfile(member) as src, open(dest_path, "wb") as dst:
+
+            src = tar.extractfile(member)
+            if src is None:
+                continue
+
+            with src, open(dest_path, "wb") as dst:
                 dst.write(src.read())
 
     print("Dataset extraction complete.")
